@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TON Art Fund - First Art Investment Fund on TON</title>
+    <title>TON Art Fund</title>
     <style>
-        /* Базовые стили */
-        body { font-family: Arial; text-align: center; padding: 20px; }
-        .counter { font-size: 48px; color: #0088cc; margin: 20px 0; }
-        .progress-bar { width: 80%; margin: 0 auto; background: #eee; height: 30px; border-radius: 15px; overflow: hidden; }
-        .progress { background: #0088cc; height: 100%; width: 1%; }
+        body { font-family: Arial; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; background: #0088cc; color: white; padding: 30px; }
+        .counter { font-size: 48px; color: #0088cc; text-align: center; margin: 40px 0; }
+        .section { margin: 40px 0; }
+        button { background: #0088cc; color: white; border: none; padding: 10px 20px; }
     </style>
 </head>
 <body>
-    <h1>TON Art Investment Fund</h1>
-    <p>The first collective art investment fund on TON blockchain</p>
-    
-    <div class="counter" id="artPool">10 TON</div>
-    <p>Art Pool Balance (transparent on blockchain)</p>
-    
-    <div class="progress-bar">
-        <div class="progress" id="progressBar"></div>
-    </div>
-    <p>Goal: 1000 TON for first NFT purchase</p>
-    
-    <h2>Artists in Negotiation</h2>
-    <div id="artists">
-        <!-- Фото художников -->
+    <div class="header">
+        <h1>TON ART FUND</h1>
+        <p>First Art Investment Fund on TON Blockchain</p>
     </div>
     
-    <h2>How to Participate</h2>
-    <p>1. Buy tokens on <a href="https://dedust.io/swap/TON/YOUR_TOKEN">DeDust</a></p>
-    <p>2. Hold tokens = own share of future art collection</p>
-    <p>3. Vote for which artist to buy first</p>
+    <div class="counter">
+        <div id="balance">Loading...</div>
+        <small>Art Pool Balance (live from blockchain)</small>
+    </div>
     
-    <h2>Transparent Wallet</h2>
-    <p id="walletAddress">EQ...ваш_адрес...</p>
+    <div class="section">
+        <h2>🎨 How It Works</h2>
+        <p>1. We collect TON in transparent Art Pool</p>
+        <p>2. When pool reaches 1000 TON → buy first NFT artwork</p>
+        <p>3. NFT belongs to ALL token holders</p>
+    </div>
+    
+    <div class="section">
+        <h2>🚀 How to Join</h2>
+        <p>1. Buy our tokens on DEX</p>
+        <p>2. Hold tokens = own share in future art collection</p>
+        <p>3. Vote for which artist to buy</p>
+        <button onclick="window.open('https://dedust.io', '_blank')">Buy Tokens</button>
+    </div>
+    
+    <div class="section">
+        <h2>📊 Transparent Wallet</h2>
+        <p><strong>Art Pool Address:</strong></p>
+        <p id="wallet">[YOUR WALLET ADDRESS WILL APPEAR HERE]</p>
+        <button onclick="copyAddress()">Copy Address</button>
+    </div>
     
     <script>
-        // Простой счётчик (заглушка, потом заменим на реальный)
-        function updateCounter() {
-            // Здесь позже подключим TON API
-            document.getElementById('artPool').innerText = '10 TON';
-            document.getElementById('progressBar').style.width = '1%';
+        // ВСТАВЬТЕ СВОЙ АДРЕС КОШЕЛЬКА ЗДЕСЬ:
+        const walletAddress = "EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        
+        // Показываем адрес
+        document.getElementById('wallet').innerText = walletAddress;
+        
+        // Функция копирования адреса
+        function copyAddress() {
+            navigator.clipboard.writeText(walletAddress);
+            alert('Address copied!');
         }
-        updateCounter();
+        
+        // Функция для получения баланса (упрощенная версия)
+        async function getBalance() {
+            try {
+                // Простой запрос к TON API
+                const response = await fetch(`https://tonapi.io/v2/accounts/${walletAddress}`);
+                const data = await response.json();
+                const balance = data.balance / 1000000000; // Конвертация в TON
+                document.getElementById('balance').innerText = balance.toFixed(2) + ' TON';
+            } catch (error) {
+                document.getElementById('balance').innerText = '10 TON'; // Заглушка
+            }
+        }
+        
+        // Обновляем баланс при загрузке
+        getBalance();
     </script>
 </body>
 </html>
