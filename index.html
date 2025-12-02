@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TON Art Fund - First Art Investment Fund on TON</title>
+    <style>
+        /* Базовые стили */
+        body { font-family: Arial; text-align: center; padding: 20px; }
+        .counter { font-size: 48px; color: #0088cc; margin: 20px 0; }
+        .progress-bar { width: 80%; margin: 0 auto; background: #eee; height: 30px; border-radius: 15px; overflow: hidden; }
+        .progress { background: #0088cc; height: 100%; width: 1%; }
+    </style>
+</head>
+<body>
+    <h1>TON Art Investment Fund</h1>
+    <p>The first collective art investment fund on TON blockchain</p>
+    
+    <div class="counter" id="artPool">10 TON</div>
+    <p>Art Pool Balance (transparent on blockchain)</p>
+    
+    <div class="progress-bar">
+        <div class="progress" id="progressBar"></div>
+    </div>
+    <p>Goal: 1000 TON for first NFT purchase</p>
+    
+    <h2>Artists in Negotiation</h2>
+    <div id="artists">
+        <!-- Фото художников -->
+    </div>
+    
+    <h2>How to Participate</h2>
+    <p>1. Buy tokens on <a href="https://dedust.io/swap/TON/YOUR_TOKEN">DeDust</a></p>
+    <p>2. Hold tokens = own share of future art collection</p>
+    <p>3. Vote for which artist to buy first</p>
+    
+    <h2>Transparent Wallet</h2>
+    <p id="walletAddress">EQ...ваш_адрес...</p>
+    
+    <script>
+        // Простой счётчик (заглушка, потом заменим на реальный)
+        function updateCounter() {
+            // Здесь позже подключим TON API
+            document.getElementById('artPool').innerText = '10 TON';
+            document.getElementById('progressBar').style.width = '1%';
+        }
+        updateCounter();
+    </script>
+</body>
+</html>
